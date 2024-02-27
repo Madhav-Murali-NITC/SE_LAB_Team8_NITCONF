@@ -35,6 +35,10 @@ The NITCONF website enhances the conference management process by providing feat
 - Email notifications for registration and paper submission.
 - Web browser communications for paper submission.
 
+### Frontend Implementation
+-The frontend of the NITCONF Conference Website utilizes React, HTML, CSS, and JavaScript to efficiently call backend APIs and render dynamic content. Through React's component-based approach, we ensure seamless data retrieval and presentation to users. 
+-HTML and CSS handle layout and styling, while JavaScript facilitates API interaction, enhancing user experience by displaying user profiles, submission statuses, paper details,submitted versions and their associated comments.
+
 ## System Features
 
 ### Authentication
@@ -89,3 +93,5 @@ The NITCONF website enhances the conference management process by providing feat
 - Implement version control system for code management.
 
 This documentation provides an overview of the NITCONF Conference Website, its features, and API endpoints. For more detailed information, refer to the specific sections and endpoints mentioned above.
+
+
