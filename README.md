@@ -18,28 +18,14 @@ The NITCONF website enhances the conference management process by providing feat
 
 ![FLOWCHART](https://github.com/mikasajaeger19/SE_LAB_Team8_NITCONF/blob/main/docs/flow_chart.png?raw=true)
 
-### User Classes and Characteristics
-Authors are the primary users of the system, who must log in using their Google accounts to submit research papers, manage version history, and view their status.
-
-### Operating Environment
-The website is a web-based application compatible with major operating systems and browsers. It utilizes the Spring Boot framework with Java.
-
-### Assumptions and Dependencies
-- Users have internet access.
-- Users follow provided guidelines.
-- Dependencies on Spring Boot, external libraries, and notification system.
 
 ## External Interface Requirements
 
-### User Interfaces
+### User Interface
 - Web-based application with login screens.
 - Dashboard for submission status.
 - Facility to upload research papers.
 - Deadline notification.
-
-### Hardware Interfaces
-- Compatible with various devices.
-- Requires internet access.
 
 ### Software Interfaces
 - Interfaces with a relational database.
