@@ -1,137 +1,105 @@
-# NITCONF - SE LAB MODULE 1
+# NITCONF Conference Website
 
-## Software Requirements Specification
+## Introduction
 
-### Table of Contents
-1. [Revision History](#1-revision-history)
-2. [Introduction](#2-introduction)
-   - 2.1 [Purpose](#21-purpose)
-   - 2.2 [Intended Audience](#22-intended-audience)
-   - 2.3 [Product Scope](#23-product-scope)
-   - 2.4 [References](#24-references)
-3. [Overall Description](#3-overall-description)
-   - 3.1 [Product Perspective](#31-product-perspective)
-   - 3.2 [Product Functions](#32-product-functions)
-   - 3.3 [User Classes and Characteristics](#33-user-classes-and-characteristics)
-   - 3.4 [Operating Environment](#34-operating-environment)
-   - 3.5 [Design and Implementation Constraints](#35-design-and-implementation-constraints)
-   - 3.6 [User Documentation](#36-user-documentation)
-   - 3.7 [Assumptions and Dependencies](#37-assumptions-and-dependencies)
-4. [External Interface Requirements](#4-external-interface-requirements)
-   - 4.1 [User Interfaces](#41-user-interfaces)
-   - 4.2 [Hardware Interfaces](#42-hardware-interfaces)
-   - 4.3 [Software Interfaces](#43-software-interfaces)
-   - 4.4 [Communications Interfaces](#44-communications-interfaces)
-5. [System Features](#5-system-features)
-   - 5.1 [Authentication](#51-authentication)
-   - 5.2 [Dashboard](#52-dashboard)
-      - 5.2.1 [User Profile](#521-user-profile)
-      - 5.2.2 [Upload and View Submissions](#522-upload-and-view-submissions)
-      - 5.2.3 [Interaction With Reviewers](#523-interaction-with-reviewers)
-      - 5.2.4 [Notification System](#524-notification-system)
-6. [Other Nonfunctional Requirements](#6-other-nonfunctional-requirements)
-   - 6.1 [Performance Requirements](#61-performance-requirements)
-   - 6.2 [Safety & Security Requirements](#62-safety-and-security-requirements)
-   - 6.3 [Software Quality Attributes](#63-software-quality-attributes)
-      - 6.3.1 [Reliability](#631-reliability)
-      - 6.3.2 [Adaptability](#632-adaptability)
-      - 6.3.3 [Maintainability](#633-maintainability)
-      - 6.3.4 [Portability](#634-portability)
-      - 6.3.5 [Cost Effectiveness](#635-cost-effectiveness)
+Welcome to the documentation for the NITCONF Conference Website! This document outlines the software requirements and API endpoints for the website, focusing on speaker login, project submission functionalities, paper management, and version history.
 
-## 1. Revision History
-- Version 1.0 
+## Overall Description
 
-## 2. Introduction
-### 2.1 Purpose
-This document outlines the requirements for the NITCONF Conference Website, focusing on speaker login and project submission functionalities along with being able to view their details and status of their papers.
+### Product Perspective
+The NITCONF website enhances the conference management process by providing features for speakers to submit research papers, view their status, and manage multiple iterations of submitted papers efficiently.
 
-### 2.2 Intended Audience
-- Intended for speakers to submit their research papers as part of the CFP process.
-
-### 2.3 Product Scope
-- Specifies features related to the CFP process.
-- Enables users to login and submit abstracts.
-
-### 2.4 References
-- [Spring Boot Documentation](https://spring.io/)
-
-## 3. Overall Description
-### 3.1 Product Perspective
-- NITCONF website enhances the conference management process.
-
-### 3.2 Product Functions
-- User login using Google.
-- Abstract submission (upto 3).
+### Product Functions
+- User login using Google authentication.
+- Abstract submission for research papers (up to 3 submissions).
 - View status of submitted papers.
 - Edit and view speaker details.
+- Version history functionality for managing multiple iterations of submitted papers and associated comments.
 
-  ![FLOWCHART](https://github.com/mikasajaeger19/SE_LAB_Team8_NITCONF/blob/main/docs/flow_chart.png?raw=true)
+![FLOWCHART](https://github.com/mikasajaeger19/SE_LAB_Team8_NITCONF/blob/main/docs/flow_chart.png?raw=true)
 
-### 3.3 User Classes and Characteristics
-1. Authors:
-   - Must log in using Google account.
-   - Primary functionality used is uploading research papers and viewing their status.
+### User Classes and Characteristics
+Authors are the primary users of the system, who must log in using their Google accounts to submit research papers, manage version history, and view their status.
 
-### 3.4 Operating Environment
-- Web-based application.
-- Compatible with major OS and browsers.
-- Uses Spring Boot framework with Java.
+### Operating Environment
+The website is a web-based application compatible with major operating systems and browsers. It utilizes the Spring Boot framework with Java.
 
-### 3.5 Assumptions and Dependencies
+### Assumptions and Dependencies
 - Users have internet access.
 - Users follow provided guidelines.
 - Dependencies on Spring Boot, external libraries, and notification system.
 
-## 4. External Interface Requirements
-### 4.1 User Interfaces
-1. Logical Characteristics:
-   - Web-based application.
-   - User Login Screens.
-   - Dashboard displaying submission status.
-   - Facility to upload research papers.
-   - Deadline Notification.
+## External Interface Requirements
 
-### 4.2 Hardware Interfaces
+### User Interfaces
+- Web-based application with login screens.
+- Dashboard for submission status.
+- Facility to upload research papers.
+- Deadline notification.
+
+### Hardware Interfaces
 - Compatible with various devices.
 - Requires internet access.
 
-### 4.3 Software Interfaces
-- Interfaces with relational database.
-- Uses Spring Boot.
-- REST APIs for CRUD functionality.
+### Software Interfaces
+- Interfaces with a relational database.
+- Utilizes Spring Boot with REST APIs for CRUD functionality.
 
-### 4.4 Communications Interfaces
-- Email notification informing participants of registration and confirmation of paper submission and acceptance.
-- Web Browser Communications to upload research papers and speaker data.
+### Communications Interfaces
+- Email notifications for registration and paper submission.
+- Web browser communications for paper submission.
 
-## 5. System Features
-### 5.1 Authentication
-- User login using Google.
+## System Features
 
-### 5.2 Dashboard
-#### 5.2.1 User Profile
-- View/update user details.
+### Authentication
+- **Endpoint:** `/login`
+- **Description:** Authenticate and log in a user using Google authentication.
 
-#### 5.2.2 Upload And View Submissions
-- Upload papers and add associated tags which enable viewers to filter papers by topic.
-- View submission status.
-- Re-submit with reviewer-suggested changes, within a reviewer specified deadline.
-- View paper history and associated reviewer comments for the version.
+### Dashboard
+- **Endpoint:** `/demo/user/{id}`
+- **Description:** Retrieve details of a user specified by its ID.
 
-#### 5.2.3 Interaction With Reviewers
-- View reviewer comments and enable authors to reply to them if necessary.
-- Reviewers maintain anonymity through interaction in the comments on a paper's page.
-- View whether individual reviewer has given approval or not.
+### Paper Management
+- **Endpoint:** `/paper/add`
+- **Description:** Add a new paper to the system.
+- **Endpoint:** `/paper/update/{paperId}`
+- **Description:** Update details of a paper specified by its ID.
+- **Endpoint:** `/paper/{paperId}`
+- **Description:** Retrieve details of a paper specified by its ID.
+- **Endpoint:** `/paper/author/{id}`
+- **Description:** Retrieve details of a paper specified by its author's ID.
+- **Endpoint:** `/paper/all`
+- **Description:** Retrieve details of all papers.
+- **Endpoint:** `/paper/`
+- **Description:** Retrieve details of papers associated with the current user.
 
-#### 5.2.4 Notification System
-- Receive urgent notifications via email.
+### User Management
+- **Endpoint:** `/demo/add`
+- **Description:** Add a new user to the system.
+- **Endpoint:** `/demo/update`
+- **Description:** Update details of a user.
+- **Endpoint:** `/demo/all`
+- **Description:** Retrieve details of all users.
 
-## 6. Other Nonfunctional Requirements
-### 6.1 Performance Requirements
-- Response time, concurrent user handling, scalability.
-- Database and network performance.
-- Reliability and uptime.
+### Comments Management
+- **Endpoint:** `/comments/add/{versionId}`
+- **Description:** Add a new comment to a specific version.
+- **Endpoint:** `/comments/version/{versionId}`
+- **Description:** Retrieve comments for a specific version.
+- **Endpoint:** `/comments/paper/{paperId}`
+- **Description:** Retrieve comments for a specific paper.
+- **Endpoint:** `/comments/all`
+- **Description:** Retrieve details of all comments.
 
-### 6.2 Safety and Security Requirements
-- Data security through dedicated database
+## Other Nonfunctional Requirements
+
+### Performance Requirements
+- Ensure optimal response time, concurrent user handling, and scalability.
+- Monitor database and network performance.
+- Ensure reliability and uptime.
+
+### Safety and Security Requirements
+- Ensure data security through a dedicated database.
+- Implement version control system for code management.
+
+This documentation provides an overview of the NITCONF Conference Website, its features, and API endpoints. For more detailed information, refer to the specific sections and endpoints mentioned above.
