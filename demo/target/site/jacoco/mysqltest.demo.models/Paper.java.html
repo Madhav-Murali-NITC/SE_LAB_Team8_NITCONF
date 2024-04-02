@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Paper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">mysqltest.demo.models</a> &gt; <span class="el_source">Paper.java</span></div><h1>Paper.java</h1><pre class="source lang-java linenums">package mysqltest.demo.models;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.time.LocalDate;
+
+@Document(collection = &quot;papers&quot;)
+public class Paper {
+    @Id
+    private String paperId;
+
+    private String title;
+    private Boolean approved;
+    private String shortdesc;
+    private String abstractUrl;
+
+    // Additional fields
+    private String tags;
+    private LocalDate uploadDate;
+    private String authorId;
+    private byte[] file;
+
+<span class="fc" id="L23">    public Paper() {</span>
+<span class="fc" id="L24">    }</span>
+
+    public Paper(String title, Boolean approved, String shortdesc, String abstractUrl,
+<span class="nc" id="L27">                 String tags, LocalDate uploadDate, String authorId, byte[] file) {</span>
+
+<span class="nc" id="L29">        this.title = title;</span>
+<span class="nc" id="L30">        this.approved = approved;</span>
+<span class="nc" id="L31">        this.shortdesc = shortdesc;</span>
+<span class="nc" id="L32">        this.abstractUrl = abstractUrl;</span>
+<span class="nc" id="L33">        this.tags = tags;</span>
+<span class="nc" id="L34">        this.uploadDate = uploadDate;</span>
+<span class="nc" id="L35">        this.authorId = authorId;</span>
+<span class="nc" id="L36">        this.file = file;</span>
+<span class="nc" id="L37">    }</span>
+
+    public String getId() {
+<span class="fc" id="L40">        return paperId;</span>
+    }
+
+    public void setId(String id) {
+<span class="fc" id="L44">        this.paperId = id;</span>
+<span class="fc" id="L45">    }</span>
+
+    public String getTitle() {
+<span class="fc" id="L48">        return title;</span>
+    }
+
+    public void setTitle(String title) {
+<span class="fc" id="L52">        this.title = title;</span>
+<span class="fc" id="L53">    }</span>
+
+    public Boolean getApproved() {
+<span class="fc" id="L56">        return approved;</span>
+    }
+
+    public void setApproved(Boolean approved) {
+<span class="fc" id="L60">        this.approved = approved;</span>
+<span class="fc" id="L61">    }</span>
+
+    public String getShortdesc() {
+<span class="fc" id="L64">        return shortdesc;</span>
+    }
+
+    public void setShortdesc(String shortdesc) {
+<span class="fc" id="L68">        this.shortdesc = shortdesc;</span>
+<span class="fc" id="L69">    }</span>
+
+    public String getAbstractUrl() {
+<span class="fc" id="L72">        return abstractUrl;</span>
+    }
+
+    public void setAbstractUrl(String abstractUrl) {
+<span class="fc" id="L76">        this.abstractUrl = abstractUrl;</span>
+<span class="fc" id="L77">    }</span>
+
+    public String getTags() {
+<span class="fc" id="L80">        return tags;</span>
+    }
+
+    public void setTags(String tags) {
+<span class="fc" id="L84">        this.tags = tags;</span>
+<span class="fc" id="L85">    }</span>
+
+    public LocalDate getUploadDate() {
+<span class="fc" id="L88">        return uploadDate;</span>
+    }
+
+    public void setUploadDate(LocalDate uploadDate) {
+<span class="fc" id="L92">        this.uploadDate = uploadDate;</span>
+<span class="fc" id="L93">    }</span>
+
+    public String getAuthorId() {
+<span class="fc" id="L96">        return authorId;</span>
+    }
+
+    public void setAuthorId(String authorId) {
+<span class="fc" id="L100">        this.authorId = authorId;</span>
+<span class="fc" id="L101">    }</span>
+
+    public byte[] getFile() {
+<span class="fc" id="L104">        return file;</span>
+    }
+
+    public void setFile(byte[] file) {
+<span class="fc" id="L108">        this.file = file;</span>
+<span class="fc" id="L109">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

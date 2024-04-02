@@ -1,113 +1,87 @@
 package mysqltest.demo.models;
-
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import mysqltest.demo.models.Paper;
 import java.time.LocalDate;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-
-
-@Entity
+@Document(collection = "versions")
 public class Version {
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Integer versionId;
+    @Id
+    private String versionId;
 
-  private String title;
-  private String abstractUrl;
-  private String comments;
-  private LocalDate releaseDate;
+    private String title;
+    private String abstractUrl;
+    private LocalDate releaseDate;
 
-  private Integer paperId;
+    private String paperId; // Changed to String to store ObjectId
+    private byte[] file;
 
-  // @ManyToOne
-  // private Paper paper;
+    public Version() {
+        // Default constructor required by Spring Data MongoDB
+    }
 
-  public Version() {
-    // Default constructor required by JPA
-  }
+    public Version (Paper paper) {
+        this.title = paper.getTitle();
+        this.abstractUrl = paper.getAbstractUrl();
+        this.releaseDate = paper.getUploadDate();
+        this.paperId = paper.getId();
+        this.file = paper.getFile();
+    }
 
-  public Version(String title, String abstractUrl, String comments, LocalDate releaseDate, Integer paperId) {
-    this.title = title;
-    this.abstractUrl = abstractUrl;
-    this.comments = comments;
-    this.releaseDate = releaseDate;
-    this.paperId = paperId;
-  }
+    public Version(String title, String abstractUrl, LocalDate releaseDate, String paperId, byte[] file) { 
+        this.title = title;
+        this.abstractUrl = abstractUrl;
+        this.releaseDate = releaseDate;
+        this.paperId = paperId;
+        this.file = file;
+    }
 
-  // Getter and Setter methods for all fields
+    // Getters and setters
+    public String getId() {
+        return versionId;
+    }
 
-  public Integer getVersionId() {
-    return versionId;
-  }
+    public void setId(String id) {
+        this.versionId = id;
+    }
 
-  public void setVersionId(Integer versionId) {
-    this.versionId = versionId;
-  }
+    public String getTitle() {
+        return title;
+    }
 
-  public String getTitle() {
-    return title;
-  }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-  public void setTitle(String title) {
-    this.title = title;
-  }
+    public String getAbstractUrl() {
+        return abstractUrl;
+    }
 
-  public String getAbstractUrl() {
-    return abstractUrl;
-  }
+    public void setAbstractUrl(String abstractUrl) {
+        this.abstractUrl = abstractUrl;
+    }
 
-  public void setAbstractUrl(String abstractUrl) {
-    this.abstractUrl = abstractUrl;
-  }
+    public LocalDate getReleaseDate() {
+        return releaseDate;
+    }
 
-  // public String[] getComments() {
-  //   return comments;
-  // }
+    public void setReleaseDate(LocalDate releaseDate) {
+        this.releaseDate = releaseDate;
+    }
 
-//   public void setComments(String comment) {
-//     // Check if comments array is null
-//     if (this.comments == null) {
-//         this.comments = new String[]{comment};
-//     } else {
-//         // Create a new array with increased size
-//         String[] newComments = new String[this.comments.length + 1];
+    public String getPaperId() {
+        return paperId;
+    }
 
-//         // Copy existing comments to the new array
-//         System.arraycopy(this.comments, 0, newComments, 0, this.comments.length);
+    public void setPaperId(String paperId) {
+        this.paperId = paperId;
+    }
 
-//         // Append the new comment to the end of the array
-//         newComments[this.comments.length] = comment;
+    public byte[] getFile() {
+        return file;
+    }
 
-//         // Update the comments array
-//         this.comments = newComments;
-//     }
-// }
-
-  public String getComments() {
-    return comments;
-  }
-
-  public void setComments(String comments) {
-    this.comments = comments;
-  }
-
-  public LocalDate getReleaseDate() {
-    return releaseDate;
-  }
-
-  public void setReleaseDate(LocalDate releaseDate) {
-    this.releaseDate = releaseDate;
-  }
-
-  public Integer getPaper() {
-    return paperId;
-  }
-
-  public void setPaper(Integer paperId) {
-    this.paperId = paperId;
-  }
-
+    public void setFile(byte[] file) {
+        this.file = file;
+    }
 }

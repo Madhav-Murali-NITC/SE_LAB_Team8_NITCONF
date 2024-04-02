@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CommentsController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">demo</a> &gt; <a href="index.source.html" class="el_package">mysqltest.demo.controllers</a> &gt; <span class="el_source">CommentsController.java</span></div><h1>CommentsController.java</h1><pre class="source lang-java linenums">package mysqltest.demo.controllers;
+import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import mysqltest.demo.models.Comments;
+import mysqltest.demo.repositories.CommentRepository;
+
+/**
+ * Controller class for managing comments on versions.
+ */
+@RestController
+@RequestMapping(path = &quot;/comments&quot;)
+<span class="fc" id="L13">public class CommentsController {</span>
+    @Autowired
+    private CommentRepository commentRepository;
+
+    /**
+     * Adds a new comment to a specific version.
+     *
+     * @param comment    The comment content.
+     * @param versionId  The ID of the version to which the comment is added.
+     * @return A string indicating the status of the operation.
+     */
+    @PostMapping(path = &quot;/add/{versionId}&quot;)
+    public ResponseEntity &lt;String&gt; addNewComment(@RequestBody String comment, @PathVariable String versionId) {
+<span class="fc" id="L26">        Comments newComment = new Comments();</span>
+<span class="fc" id="L27">        newComment.setComment(comment);</span>
+<span class="fc" id="L28">        newComment.setVersionId(versionId);</span>
+<span class="fc" id="L29">        commentRepository.save(newComment);</span>
+<span class="fc" id="L30">        return ResponseEntity.ok(&quot;Saved&quot;);</span>
+    }
+
+    /**
+     * Retrieves comments for a specific version.
+     *
+     * @param versionId The ID of the version for which comments are retrieved.
+     * @return Iterable of comments for the specified version.
+     */
+    @GetMapping(path = &quot;/version/{versionId}&quot;)
+    public ResponseEntity &lt;Iterable&lt;Comments&gt;&gt; getCommentsForVersion(@PathVariable String versionId) {
+        // Assuming there is a method in the versionRepository to find comments by versionId
+<span class="fc" id="L42">        Iterable&lt;Comments&gt; result = commentRepository.findByVersionId(versionId);</span>
+<span class="fc" id="L43">        return ResponseEntity.ok(result);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

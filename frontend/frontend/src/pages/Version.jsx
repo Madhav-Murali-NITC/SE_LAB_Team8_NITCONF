@@ -5,6 +5,9 @@ import dummy from '../dummy.json';
 import Navbar from './Navbar.jsx';
 import Comments from './Comments.jsx';
 import './Version.css';
+import { useNavigate } from 'react-router-dom';
+import Card from '../components/Card.jsx';
+import Footer from './Footer.jsx';
 
 
 
@@ -63,6 +66,8 @@ const Version = () => {
     const [versionPapers, setVersionPapers] = useState([]);
 
     const [selectedPaperVersion, setSelectedPaperVersion] = useState([]);
+
+
     
     
     useEffect( () => {
@@ -77,7 +82,8 @@ const Version = () => {
                     
                 })
                 setVersionPapers(response.data)
-                console.log('the versions of the selected paper are: ' + response.data)
+                console.log('the versions of the selected paper are: ')
+                console.log(versionPapers)
                 
             } catch(error){
                 
@@ -98,56 +104,51 @@ const Version = () => {
     
   
 
-    const handleDropdownChangePapers = (e) => {
-       console.log('selected version id is :' + e.target.value)
-        setVersionPaperId(e.target.value);
-        setSelectedPaperVersion('');
+    const handleDropdownChangePapers = (paperId) => {
+       console.log('selected version id is :' + paperId)
+        setVersionPaperId(paperId);
+        setSelectedPaperVersion(paperId);
     
     } 
 
 
 
-
     return (
-        <div className='container'>
+        <div className='version-container'>
             <Navbar />
-
-            <h1>Select Paper</h1>
+            <div className='version-content'>
+            <div className='version-sidebar'></div>
+                <div className='version-body'>
+                    <h1 className='version-text'>VERSI<span className='version-o'>O</span>NS</h1>
             <div className='dropdown--div'>  
-                    <select id="dropdown" value={versionPaperId} onChange={handleDropdownChangePapers}>
-                    <option value=''>Select a paper</option>  
-                        {allPapers.map((option) =>(
-                            <option key={option.id} value={option.id}>
-                                {option.title}
-                            </option>
-                        ))}
-                    </select>
+                <h2 className='choose-paper'>CHOOSE A PAPER</h2>
+                      <div className = 'reupload-papers-container'>
+                        
+                        {allPapers.map((paper, index) => paper.approved === false && 
+                          <div className='paper-option'>
+                            {paper.id === selectedPaperVersion ? <img src='./tick.svg' alt = 'tick' /> : null}
+                            <h2 key = {paper.id} onClick  = {() => handleDropdownChangePapers(paper.id)}className='reupload-titles'>{paper.title}</h2>
+                            </div>
+                        )}
+                        </div>
                 </div>
+                
 
-
-
-
-            <h1>Version History</h1>
-            <div className='dropdown--div'>  
-                    <select id="dropdown" value={selectedPaperVersion} onChange={handleDropdownChange}>
-                    <option value=''>Select a paper</option>  
-                        {versionPapers.map((option) =>  (
-                            <option key={option.versionId} value={option.versionId}>
-                                {option.title}
-                            </option>
-                        ))}
-                    </select>
+                <div className='version--cards'>
+                    {versionPapers.map((version,index) => (
+                        <div>
+                        <h3>Version {index+1}</h3>
+                        <Card key={version.id} ver ={true} data={version} />
+                        </div>
+                    ))
+                    }
                 </div>
-
-                <div>
-                    <Comments paperId ={versionPaperId} versionId={selectedPaperVersion} />
-
                 </div>
+                <div className='version-sidebar'></div>
+                </div>
+  
 
-
-
-
-            
+        <Footer />
         </div>
     );
 };

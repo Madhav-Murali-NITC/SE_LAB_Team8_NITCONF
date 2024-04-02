@@ -3,6 +3,8 @@ import { useState,useEffect } from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 import Navbar from './Navbar.jsx'
+import './Personal.css'
+import Footer from './Footer.jsx'
 
 
 export const Personal = () => {
@@ -18,7 +20,14 @@ export const Personal = () => {
 
         const fetchUserData = async() =>{
             try {
-                const response  =await axios.get(`http://localhost:8080/demo/user/${id}`)
+                const response  =await axios.get(`http://localhost:8080/demo/user/${id}`,
+                 {
+                    headers: {
+                        Authorization: 'Bearer ' + localStorage.getItem('token')
+                    }
+                })
+                
+                  
                 console.log(response.data)
                 setuserData(response.data)
             } catch(error){
@@ -37,23 +46,37 @@ export const Personal = () => {
   return (
     
     
-    <div className='container'>
+    <div className='personal-container'>
          <Navbar />
-    <div className='div'>
-        <h1 className = 'heading'>Account Details</h1>
-        <div className = 'underlinecont'>
-        <p className = 'underline'> </p>
+
+    <div className='mainbody'>
+
+        <div className='sidebar'></div>
+
+        <div className='details--container'>
+            <h1>PERS<span className='o'>O</span>NAL</h1>
+            <div className='information--container'>
+            <div className='details'>
+            
+                <p className='information'>{userData.name}</p>
+                <p className='information'>{userData.email}</p>
+                <p className='information'>{userData.altEmail}</p>
+                <p className='information'>{userData.phone}</p>
+            </div>
+                
+                <a href = {`/editdetails`}><button className='edit'>EDIT</button></a>
+                <a href= {`/`}><button className='edit'>LOG</button></a>
+            </div>
         </div>
-        <img  className = 'pfp' src = {userData.pfp} alt = 'not loaded'/>
-        <p className='information'>Name : {userData.name}</p>
-        <p className='information'>Email : {userData.email}</p>
-        <p className='information'>Phone : {userData.phone}</p>
-        <p className='information'>Alt email : {userData.alt}</p>
-        <h2><Link className = 'homebuttom' to = '/dashboard'>Go to Dashboard</Link></h2>
-        <h2><Link className = 'editpage' to = '/editdetails'>Edit Details</Link></h2>
+
+        <div className='sidebar'></div>
+        
+        
         
        
     </div>   
+   
+   <Footer />
     </div>
     
     
